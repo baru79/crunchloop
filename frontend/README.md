@@ -1,50 +1,91 @@
-# React + TypeScript + Vite
+# Todo Lists UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es el frontend para la aplicación de gestión de listas de tareas (Todo Lists). Está construido con React, TypeScript y Vite.
 
-Currently, two official plugins are available:
+## Instrucciones de Ejecución
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Ejecución Local
 
-## Expanding the ESLint configuration
+Para ejecutar el proyecto localmente, sigue estos pasos:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1.  Asegúrate de tener Node.js instalado.
+2.  Ejecuta el proyecto de backend ubicado en la carpeta `backend`.
+3.  Instala las dependencias:
+    ```bash
+    npm install
+    ```
+4.  Inicia el servidor de desarrollo:
 
-- Configure the top-level `parserOptions` property like this:
+    ```bash
+    npm run dev
+    ```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+5.  Abre tu navegador en la URL que se muestra en la terminal (usualmente `http://localhost:5173`).
+
+### Ejecución de Unit Tests
+
+El proyecto utiliza Vitest para las pruebas unitarias. Para ejecutarlas:
+
+```bash
+npm run test
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Librerías Usadas
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### @hello-pangea/dnd
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+Se utiliza para la funcionalidad de "Drag and Drop" (arrastrar y soltar) de los items en las listas.
+
+**Razón de la elección:** Es un fork mantenido y accesible de `react-beautiful-dnd`. Proporciona una experiencia de usuario fluida y natural para reordenar listas, gestionando la complejidad de las interacciones de arrastre y las animaciones de forma eficiente en React, asegurando compatibilidad con versiones recientes de React (como React 18).
+
+### tailwindcss
+
+Se utiliza para el manejo de estilos de la aplicación.
+
+**Razón de la elección:** Permite un desarrollo rápido de la interfaz de usuario mediante clases de utilidad. Facilita la creación de un diseño consistente y responsivo, y simplifica enormemente la implementación y mantenimiento del modo oscuro (Dark Mode) y temas personalizados sin la sobrecarga de archivos CSS tradicionales.
+
+## Diseño de la App
+
+Se tomó como referencia el siguiente Figma (https://www.figma.com/design/eLY9H4h1aKQrDZg7XmPIHE/To-do-list-project)
+
+## Persistencia del Estado
+
+El estado de la aplicación se mantiene en el `localStorage`, para de esta forma ante un refresco `localhost:5173` la app se mostrará correctamente con todas listas, items y modo claro/oscuro.
+
+## Prompt Inicial
+
+A continuación se detalla el prompt utilizado para la creación base del proyecto a través del agente de IA:
+
+Preciso implementar la app TODO List en React y Typescript.
+
+Para eso primero debes crear dentro de `/src`:
+
+- una carpeta types, con los tipos extraidos desde el backend dentro de `/backend/src/todo-lists/entities`
+
+- una variable de entorno `VITE_API_URL:http://localhost:4000/api`
+
+- una carpeta services, con un archivo `todoService.ts` con los servicios del _CRUD_ para **TODO-LIST** y **TODO-ITEMS** (basandote en la carpeta de backend)
+
+- una carpeta hooks, con un archivo `useTodoManager.ts` para el manejo de las operaciones _CRUD_, que usara desde `todoService.ts`
+
+- una carpeta components con los siguientes componentes:
+  - **CreateListForm.tsx** (para la creacion de listas)
+
+  - **ListView.tsx** (para visualizar la Lista, que contendra el nombre de la lista y los items, ademas de un form para poder agregar items. En la parte superior del lado izquierdo estara el nombre de la lista, y del lado derecho un badge con la cantidad de items y sobre la esquina superior un icon `CloseIcon.tsx` para poder eliminar la lista)
+
+  - **ItemRow.tsx** (para visualizar el item, que tendra un checkbox a la izquierda, luego el nombre del item y debajo la descripcion. A la derecha debe haber un icono DeleteIcon para poder eliminar el item)
+
+  - **AddItemRow.tsx** (es un formulario que contiene un input y un boton con un icono PlusIcon. Dentro del input se podra tipear un item y sera agregado con el boton PlusIcon ubicado a la derecha del input)
+
+- Dentro de la carpeta components se debe crear una carpeta icons con los siguientes icons en svg:
+  - **CloseIcon.tsx** (usado en ListView para eliminar la lista)
+
+  - **DeleteIcon.tsx** (usado en cada ItemRow para eliminar el item)
+
+  - **PlusIcon.tsx** (usado en el boton de AddItemForm para agregar un item)
+
+  - **SpinerIcon.tsx** (usado para el estado de loading inicial cuando se cargan las listas)
+
+```
+
 ```
