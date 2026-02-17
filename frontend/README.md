@@ -85,7 +85,3 @@ Para eso primero debes crear dentro de `/src`:
   - **PlusIcon.tsx** (usado en el boton de AddItemForm para agregar un item)
 
   - **SpinerIcon.tsx** (usado para el estado de loading inicial cuando se cargan las listas)
-
-```
-
-```
