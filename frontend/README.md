@@ -1,166 +1,165 @@
 # Todo Lists UI
 
-Este proyecto es el frontend para la aplicación de gestión de listas de tareas (Todo Lists). Está construido con React, TypeScript y Vite.
+This project is the frontend for the task management application (Todo Lists). It is built with **React**, **TypeScript**, and **Vite**.
 
-## Funcionalidades
+## Features
 
-- Creación de listas
-- Creación de ítems dentro de una lista
-- Edición de listas
-- Edición de ítems dentro de una lista
-- Eliminación de listas
-- Eliminación de ítems dentro de una lista
-- Reordenamiento de tareas mediante arrastrar y soltar (drag and drop)
-- Cambio de tema oscuro/claro
-- Filtros de ítems
-- Diseño responsivo
-- Persistencia del estado de la app a través de localStorage
-- Manejo de errores robusto
-- Manejo de notificaciones
-- Actualizaciones de UI optimistas (actualiza el estado antes de que termine la promesa)
-- Tests unitarios con Vitest
-- Tests integrales con Playwright
+- List creation
+- Item creation within a list
+- List editing
+- Item editing within a list
+- List deletion
+- Item deletion within a list
+- Task reordering via **Drag and Drop**
+- Dark/Light theme toggle
+- Item filters
+- Responsive design
+- App state persistence through `localStorage`
+- Robust error handling
+- Global notification system
+- **Optimistic UI updates** (updates UI state before the server promise resolves)
+- Unit testing with **Vitest**
+- Integration testing with **Playwright**
 
-## Instrucciones de Ejecución
+## Execution Instructions
 
-### Ejecución Local
+### Local Execution
 
-Para ejecutar el proyecto localmente, sigue estos pasos:
+To run the project locally, follow these steps:
 
-1.  Asegúrate de tener Node.js instalado.
-2.  Ejecuta el proyecto de backend ubicado en la carpeta `backend`.
-3.  Instala las dependencias:
+1.  Ensure you have **Node.js** installed.
+2.  Run the backend project located in the `backend` folder.
+3.  Install dependencies:
     ```bash
-    # Instalar las dependencias
+    # Install dependencies
     npm install
     ```
-4.  Inicia el servidor de desarrollo:
-
+4.  Start the development server:
     ```bash
-    # Ejecutar el servidor de desarrollo
+    # Run development server
     npm run dev
     ```
+5.  Open your browser at the URL shown in the terminal (usually `http://localhost:5173`).
 
-5.  Abre tu navegador en la URL que se muestra en la terminal (usualmente `http://localhost:5173`).
+### Running Unit Tests
 
-### Ejecución de Unit Tests
-
-El proyecto utiliza Vitest para las pruebas unitarias. Para ejecutarlas:
+The project uses **Vitest** for unit testing. To run them:
 
 ```bash
-# Ejecutar los tests unitarios - Modo headless (CLI)
+# Run unit tests - Headless mode (CLI)
 npm run test
 ```
 
 ```bash
-# Ejecutar los tests unitarios - Modo interactivo (UI)
+# Run unit tests - Interactive mode (UI)
 npm run test:ui
 ```
 
-### Ejecución de Tests de Integración (E2E)
+### Running Integration Tests (E2E)
 
-El proyecto utiliza **Playwright** para pruebas de flujo completo. Para ejecutarlas:
+The project uses **Playwright** for full-flow testing. To run them:
 
 ```bash
-# Ejecutar los tests de integración - Modo headless (CLI)
+# Run integration tests - Headless mode (CLI)
 npm run test:e2e
 ```
 
 ```bash
-# Ejecutar los tests de integración - Modo interactivo (UI)
+# Run integration tests - Interactive mode (UI)
 npm run test:e2e:ui
 ```
 
-## Librerías Usadas
+## Libraries Used
 
 ### @hello-pangea/dnd
 
-Se utiliza para la funcionalidad de "Drag and Drop" (arrastrar y soltar) de los ítems en las listas.
+Used for the "Drag and Drop" functionality of items within lists.
 
-**Razón de la elección:** Es un fork mantenido y accesible de `react-beautiful-dnd`. Proporciona una experiencia de usuario fluida y natural para reordenar listas, gestionando la complejidad de las interacciones de arrastre y las animaciones de forma eficiente en React, asegurando compatibilidad con versiones recientes de React (como React 18).
+**Reason for choice:** It is a maintained and accessible fork of `react-beautiful-dnd`. It provides a smooth and natural user experience for reordering lists, managing the complexity of drag interactions and animations efficiently in React, ensuring compatibility with modern versions (React 18+).
 
 ### TailwindCSS
 
-Se utiliza para el manejo de estilos de la aplicación.
+Used for the application's styling management.
 
-**Razón de la elección:** Permite un desarrollo rápido de la interfaz de usuario mediante clases de utilidad. Facilita la creación de un diseño consistente y responsivo, y simplifica enormemente la implementación y mantenimiento del modo oscuro (Dark Mode) y temas personalizados sin la sobrecarga de archivos CSS tradicionales.
+**Reason for choice:** It allows for rapid UI development through utility classes. It facilitates the creation of a consistent and responsive design, and greatly simplifies the implementation and maintenance of Dark Mode and custom themes without the overhead of traditional CSS files.
 
 ### Sonner
 
-Se utiliza para el sistema de notificaciones globales y feedback en tiempo real.
+Used for the global notification system and real-time feedback.
 
-**Razón de la elección:** Es una librería de notificaciones extremadamente ligera y con un diseño minimalista que se integra perfectamente con React. Se eligió sobre una implementación propia porque gestiona de forma nativa la pila de mensajes (stacking), las animaciones de salida y los gestos táctiles, garantizando que el usuario reciba feedback inmediato de sus acciones (como errores de API o confirmaciones de guardado) de manera fluida y no intrusiva.
+**Reason for choice:** A lightweight notification library with a minimalist design that integrates perfectly with React. It was chosen over a custom implementation because it natively manages message stacking, exit animations, and touch gestures, ensuring users receive immediate feedback (such as API errors or save confirmations) in a fluid, non-intrusive way.
 
 ### Vitest & React Testing Library
 
-Se utilizan como el ecosistema principal para la garantía de calidad y pruebas de la aplicación.
+Used as the primary ecosystem for quality assurance and application testing.
 
-**Razón de la elección:**
+**Reason for choice:**
 
-- **Vitest:** Al ser nativo de Vite, ofrece una velocidad excepcional y una integración perfecta con la configuración del proyecto, permitiendo usar las mismas transformaciones de TypeScript que en desarrollo.
+- **Vitest:** Being native to Vite, it offers exceptional speed and seamless integration with the project's configuration, allowing it to use the same TypeScript transformations as in development.
 
-- **React Testing Library:** Permite validar la interfaz desde la perspectiva del usuario. Facilita las pruebas de accesibilidad y asegura que los componentes reaccionen correctamente a eventos reales, evitando tests frágiles que dependen de los detalles internos del código.
+- **React Testing Library:** Allows validating the interface from the user's perspective. It facilitates accessibility testing and ensures components react correctly to real events, avoiding fragile tests that depend on internal code details.
 
 ### Playwright
 
-Se utiliza para la ejecución de pruebas de integración y extremo a extremo (E2E) en navegadores reales.
+Used for integration and end-to-end (E2E) testing in real browsers.
 
-**Razón de la elección:** Proporciona un entorno de pruebas robusto y moderno que permite validar el comportamiento de la aplicación tal como lo experimentaría el usuario final. Se eligió sobre otras alternativas por su capacidad de ejecutar pruebas en múltiples motores de renderizado (Chromium, Firefox) de forma nativa, su excelente manejo de esperas automáticas (auto-waiting) y su aislamiento total de estados. En este proyecto, es fundamental para garantizar que la comunicación con la API real, la persistencia en localStorage y la sincronización de estados complejos (como el modo oscuro o el orden de las listas) funcionen correctamente en un entorno productivo.
+**Reason for choice:** It provides a robust and modern testing environment that validates application behavior exactly as an end-user would experience it. It was chosen for its ability to run tests across multiple rendering engines (`Chromium`, `Firefox`) natively, its excellent auto-waiting capabilities, and full state isolation. It is essential for ensuring that communication with the real API, `localStorage` persistence, and complex state synchronization (such as **Dark Mode** or list ordering) work correctly in a production-like environment.
 
-## Manejo de Errores
+## Error Handling
 
-La aplicación implementa una estrategia de manejo de errores centralizada y predecible, tanto en la capa de servicios como en la interfaz.
+The application implements a centralized and predictable error-handling strategy, both in the service layer and the UI.
 
-**Estrategia implementada:**
+**Implemented Strategy:**
 
-- **Estandarización en Servicios:** Se utiliza una función auxiliar `handleResponseError` en los servicios de API para capturar respuestas no exitosas. Esto asegura que todos los errores lanzados contengan el código de estado HTTP y el mensaje del servidor (ej. `404 Not Found`), facilitando el rastreo de problemas.
+- **Service Standardization:** A handleResponseError helper function is used in API services to capture non-successful responses. This ensures all thrown errors contain the HTTP status code and server message (e.g., `404 Not Found`), facilitating issue tracking.
 
-- **Validación en Capa de UI:** Los hooks encargados de las operaciones CRUD gestionan excepciones para evitar cierres inesperados de la aplicación, permitiendo que la interfaz reaccione adecuadamente ante fallos de red o errores de validación del backend.
+- **UI Layer Validation:** Hooks responsible for **CRUD** operations manage exceptions to prevent unexpected app crashes, allowing the interface to react appropriately to network failures or backend validation errors.
 
-- **Feedback al Usuario:** Se han diseñado estados de carga y mensajes claros para informar al usuario cuando una operación (creación, edición o borrado) no ha podido completarse con éxito.
+- **User Feedback:** Clear loading states and messages have been designed to inform the user when an operation (creation, editing, or deletion) could not be completed successfully.
 
-## Diseño de la App
+## App Design
 
-Se tomó como referencia el siguiente Figma (https://www.figma.com/design/eLY9H4h1aKQrDZg7XmPIHE/To-do-list-project)
+The design was based on the following **Figma** reference: (https://www.figma.com/design/eLY9H4h1aKQrDZg7XmPIHE/To-do-list-project)
 
-## Persistencia del Estado
+## State Persistence
 
-El estado de la aplicación se mantiene en el `localStorage`, para de esta forma ante un refresco `localhost:5173` la app se mostrará correctamente con todas listas, items y modo claro/oscuro.
+The application state is maintained in `localStorage`. This ensures that upon refreshing `localhost:5173`, the app correctly displays all lists, items, and the selected **light/dark** mode.
 
-## IA - Prompt Inicial
+## AI - Initial Prompt
 
-A continuación se detalla el prompt utilizado para la creación base del proyecto a través del agente de IA:
+Below is the prompt used for the base creation of the project through an AI agent:
 
-Preciso implementar la app TODO List en React y TypeScript.
+I need to implement a TODO List app in React and TypeScript.
 
-Para eso primero debes crear dentro de `/src`:
+For that, you must first create within `/src`:
 
-- una carpeta types, con los tipos extraídos desde el backend dentro de `/backend/src/todo-lists/entities`
+- A types folder, with types extracted from the backend inside `/backend/src/todo-lists/entities`
 
-- una variable de entorno `VITE_API_URL:http://localhost:4000/api`
+- An environment variable VITE_API_URL:http://localhost:4000/api
 
-- una carpeta services, con un archivo todoService.ts con los servicios del CRUD para **TODO-LIST** y **TODO-ITEMS** (basándote en la carpeta de backend)
+- A services folder, with a `todoService.ts` file containing **CRUD** services for **TODO-LIST** and **TODO-ITEMS** (based on the backend folder)
 
-- una carpeta hooks, con un archivo `useTodoManager.ts` para el manejo de las operaciones CRUD, que usará desde `todoService.ts`
+- A hooks folder, with a `useTodoManager.ts` file for handling **CRUD** operations, utilizing todoService.ts
 
-- una carpeta components con los siguientes componentes:
-  - **CreateListForm.tsx** (para la creación de listas)
+- A components folder with the following components:
+  - **CreateListForm.tsx** (for list creation)
 
-  - **ListView.tsx** (para visualizar la Lista, que contendra el nombre de la lista y los items, ademas de un form para poder agregar items. En la parte superior del lado izquierdo estara el nombre de la lista, y del lado derecho sobre la esquina superior un icono `CloseIcon.tsx` para poder eliminar la lista)
+  - **ListView.tsx** (to visualize the List, containing the list name and items, plus a form to add items. The list name should be on the top-left, and a `CloseIcon.tsx` on the top-right corner to delete the list)
 
-  - **ItemRow.tsx** (para visualizar el ítem, que tendrá un checkbox a la izquierda, luego el nombre del ítem y debajo la descripción. A la derecha debe haber un icono `CloseIcon.tsx` para poder eliminar el ítem)
+  - **ItemRow.tsx** (to visualize the item, with a checkbox on the left, followed by the item name and description. A `CloseIcon.tsx` should be on the right to delete the item)
 
-  - **AddItemRow.tsx** (es un formulario que contiene un input y un botón con un icono `PlusIcon.tsx`. Dentro del input se podrá tipear un ítem y será agregado con el botón PlusIcon ubicado a la derecha del input)
+  - **AddItemRow.tsx** (a form containing an input and a button with a `PlusIcon.tsx`. Typing in the input and clicking the button adds the item)
 
-- Dentro de la carpeta components se debe crear una carpeta icons con los siguientes iconos en svg:
-  - **CloseIcon.tsx** (usado en `ListView.tsx` para eliminar la lista)
+Inside the `components` folder, create an `icons` folder with the following SVG icons:
 
-  - **DeleteIcon.tsx** (usado en cada `ItemRow.tsx` para eliminar el item)
+- **CloseIcon.tsx** (used in `ListView.tsx` for remove the list)
 
-  - **PlusIcon.tsx** (usado en el botón de `AddItemForm.tsx` para agregar un item)
+- **DeleteIcon.tsx** (used in each `ItemRow.tsx` for remove the item)
 
-  - **SpinerIcon.tsx** (usado para el estado de loading inicial cuando se cargan las listas)
+- **PlusIcon.tsx** (used in the button of `AddItemForm.tsx` for add a new item)
 
-## Refactorizacion y Testing
+- **SpinerIcon.tsx** (used for the loading state of the app when the lists are being loaded)
 
-Aunque la base fue generada mediante IA, el proyecto pasó por un proceso de refactorización para asegurar el tipado estricto (eliminando el uso de any), la implementación de patrones de diseño como Optimistic UI con Rollback y la cobertura total de servicios mediante pruebas unitarias en Vitest.
+## Refactoring and Testing
+
+Although the base was generated via AI, the project underwent a refactoring process to ensure **strict typing** (eliminating the use of any), the implementation of design patterns like **Optimistic UI with Rollback**, and full service coverage through unit tests in **Vitest**.
