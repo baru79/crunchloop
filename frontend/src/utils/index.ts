@@ -6,6 +6,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const handleResponseError = (message: string, response: Response) => {
+  throw new Error(`${message}: ${response.status} ${response.statusText}`);
+};
+
 export const getLocalStorageLists = (): TodoList[] | null => {
   const storedData = localStorage.getItem("todo-lists");
   if (storedData) {

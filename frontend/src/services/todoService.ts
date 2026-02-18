@@ -5,6 +5,7 @@ import type {
   CreateTodoItemDTO,
   UpdateTodoItemDTO,
 } from "../types";
+import { handleResponseError } from "../utils";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 
@@ -12,13 +13,15 @@ export const todoService = {
   // TODO Lists
   getTodoLists: async (): Promise<TodoList[]> => {
     const response = await fetch(`${API_URL}/todo-lists`);
-    if (!response.ok) throw new Error("Failed to fetch todo lists");
+    if (!response.ok)
+      handleResponseError("Failed to fetch todo lists", response);
     return response.json();
   },
 
   getTodoListById: async (id: number): Promise<TodoList> => {
     const response = await fetch(`${API_URL}/todo-lists/${id}`);
-    if (!response.ok) throw new Error("Failed to fetch todo list");
+    if (!response.ok)
+      handleResponseError("Failed to fetch todo list", response);
     return response.json();
   },
 
@@ -30,12 +33,8 @@ export const todoService = {
       headers: { "Content-Type": "application/json" },
       body: body,
     });
-
     if (!response.ok)
-      throw new Error(
-        `Failed to create todo list: ${response.status} ${response.statusText}`,
-      );
-
+      handleResponseError("Failed to create todo list", response);
     return response.json();
   },
 
@@ -43,7 +42,8 @@ export const todoService = {
     const response = await fetch(`${API_URL}/todo-lists/${id}`, {
       method: "DELETE",
     });
-    if (!response.ok) throw new Error("Failed to delete todo list");
+    if (!response.ok)
+      handleResponseError("Failed to delete todo list", response);
   },
 
   updateTodoList: async (id: number, name: string): Promise<TodoList> => {
@@ -52,7 +52,8 @@ export const todoService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name }),
     });
-    if (!response.ok) throw new Error("Failed to update todo list");
+    if (!response.ok)
+      handleResponseError("Failed to update todo list", response);
     return response.json();
   },
 
@@ -66,7 +67,8 @@ export const todoService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if (!response.ok) throw new Error("Failed to create todo item");
+    if (!response.ok)
+      handleResponseError("Failed to create todo item", response);
     return response.json();
   },
 
@@ -83,7 +85,8 @@ export const todoService = {
         body: JSON.stringify(data),
       },
     );
-    if (!response.ok) throw new Error("Failed to update todo item");
+    if (!response.ok)
+      handleResponseError("Failed to update todo item", response);
     return response.json();
   },
 
@@ -94,6 +97,7 @@ export const todoService = {
         method: "DELETE",
       },
     );
-    if (!response.ok) throw new Error("Failed to delete todo item");
+    if (!response.ok)
+      handleResponseError("Failed to delete todo item", response);
   },
 };
