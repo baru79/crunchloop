@@ -19,6 +19,7 @@ Este proyecto es el frontend para la aplicación de gestión de listas de tareas
 - Manejo de notificaciones
 - Actualizaciones de UI optimistas (actualiza el estado antes de que termine la promesa)
 - Tests unitarios con Vitest
+- Tests integrales con Playwright
 
 ## Instrucciones de Ejecución
 
@@ -30,11 +31,13 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
 2.  Ejecuta el proyecto de backend ubicado en la carpeta `backend`.
 3.  Instala las dependencias:
     ```bash
+    # Instalar las dependencias
     npm install
     ```
 4.  Inicia el servidor de desarrollo:
 
     ```bash
+    # Ejecutar el servidor de desarrollo
     npm run dev
     ```
 
@@ -45,7 +48,27 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
 El proyecto utiliza Vitest para las pruebas unitarias. Para ejecutarlas:
 
 ```bash
+# Ejecutar los tests unitarios - Modo headless (CLI)
 npm run test
+```
+
+```bash
+# Ejecutar los tests unitarios - Modo interactivo (UI)
+npm run test:ui
+```
+
+### Ejecución de Tests de Integración (E2E)
+
+El proyecto utiliza **Playwright** para pruebas de flujo completo. Para ejecutarlas:
+
+```bash
+# Ejecutar los tests de integración - Modo headless (CLI)
+npm run test:e2e
+```
+
+```bash
+# Ejecutar los tests de integración - Modo interactivo (UI)
+npm run test:e2e:ui
 ```
 
 ## Librerías Usadas
