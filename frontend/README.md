@@ -15,7 +15,8 @@ Este proyecto es el frontend para la aplicación de gestión de listas de tareas
 - Filtros de items
 - Diseño responsivo
 - Persistencia del estado de la app atraves de localStorage
-- Manejo de errores y notificaciones emergentes
+- Manejo de errores
+- Test unitarios con Vitest
 
 ## Instrucciones de Ejecución
 
