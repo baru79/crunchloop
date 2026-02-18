@@ -101,6 +101,12 @@ Se utilizan como el ecosistema principal para la garantía de calidad y pruebas 
 
 - **React Testing Library:** Permite validar la interfaz desde la perspectiva del usuario. Facilita las pruebas de accesibilidad y asegura que los componentes reaccionen correctamente a eventos reales, evitando tests frágiles que dependen de los detalles internos del código.
 
+### Playwright
+
+Se utiliza para la ejecución de pruebas de integración y extremo a extremo (E2E) en navegadores reales.
+
+**Razón de la elección:** Proporciona un entorno de pruebas robusto y moderno que permite validar el comportamiento de la aplicación tal como lo experimentaría el usuario final. Se eligió sobre otras alternativas por su capacidad de ejecutar pruebas en múltiples motores de renderizado (Chromium, Firefox) de forma nativa, su excelente manejo de esperas automáticas (auto-waiting) y su aislamiento total de estados. En este proyecto, es fundamental para garantizar que la comunicación con la API real, la persistencia en localStorage y la sincronización de estados complejos (como el modo oscuro o el orden de las listas) funcionen correctamente en un entorno productivo.
+
 ## Manejo de Errores
 
 La aplicación implementa una estrategia de manejo de errores centralizada y predecible, tanto en la capa de servicios como en la interfaz.
