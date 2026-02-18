@@ -1,12 +1,14 @@
+import type { SVGProps } from "react";
 import { cn } from "../../utils";
 
-export const EditIcon = ({ className }: { className?: string }) => (
+export const EditIcon = ({ className, ...props }: SVGProps<SVGSVGElement>) => (
   <svg
     className={cn(className)}
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
+    {...props}
   >
     <path
       strokeLinecap="round"

@@ -1,14 +1,12 @@
+import type { SVGProps } from "react";
 import { cn } from "../../utils";
 
 export const CloseIcon = ({
   className,
   width = 24,
   height = 24,
-}: {
-  className?: string;
-  width?: number;
-  height?: number;
-}) => (
+  ...props
+}: SVGProps<SVGSVGElement>) => (
   <svg
     className={cn(className)}
     width={width}
@@ -16,6 +14,7 @@ export const CloseIcon = ({
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    {...props}
   >
     <path
       fill="currentColor"
