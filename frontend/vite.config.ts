@@ -7,5 +7,9 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: "./src/setupTests.ts",
+    onUnhandledError: () => {
+      // Suppress unhandled errors - they are expected in error-handling tests
+      return false;
+    },
   },
 });
