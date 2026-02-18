@@ -6,7 +6,8 @@ import { DarkIcon } from "./components/icons/DarkIcon";
 import { useTodoLists } from "./hooks/useTodoLists";
 import { cn } from "./utils";
 import { useTheme } from "./hooks/useTheme";
-import { CloseIcon } from "./components/icons/CloseIcon";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 function App() {
   const { theme, toggleTheme } = useTheme();
@@ -26,6 +27,16 @@ function App() {
   } = useTodoLists();
 
   const darkMode = theme === "dark";
+
+  useEffect(() => {
+    // Error Message show in toast
+    if (error) {
+      toast.error(error, {
+        onDismiss: () => clearError(),
+        onAutoClose: () => clearError(),
+      });
+    }
+  }, [error, clearError]);
 
   return (
     <div
@@ -64,19 +75,6 @@ function App() {
             )}
           </button>
         </header>
-
-        {/* Error Message */}
-        {error && (
-          <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg flex justify-between items-center">
-            <span>{error}</span>
-            <button
-              onClick={clearError}
-              className="text-red-700 hover:text-red-800"
-            >
-              <CloseIcon className="w-6 h-6" />
-            </button>
-          </div>
-        )}
 
         {/* Create List Form */}
         <div
