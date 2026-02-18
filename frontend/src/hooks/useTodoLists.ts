@@ -9,8 +9,11 @@ export const useTodoLists = () => {
   const [error, setError] = useState<string | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  const startAction = () => setError(null);
+
   const fetchLists = useCallback(async () => {
     setLoading(true);
+    startAction();
     try {
       const storedLists = getLocalStorageLists();
       if (storedLists && storedLists.length > 0) {
@@ -20,8 +23,9 @@ export const useTodoLists = () => {
         setLists(data);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load data");
-      throw err;
+      setError(
+        err instanceof Error ? err.message : "An unexpected error occurred",
+      );
     } finally {
       setLoading(false);
       setIsInitialized(true);
@@ -39,6 +43,7 @@ export const useTodoLists = () => {
   }, [lists, isInitialized]);
 
   const createList = useCallback(async ({ name }: { name: string }) => {
+    startAction();
     try {
       const newList = await todoService.createTodoList({ name });
       setLists((prev) => [...prev, newList]);
@@ -48,36 +53,50 @@ export const useTodoLists = () => {
     }
   }, []);
 
-  const deleteList = useCallback(async (id: number) => {
-    setLists((prev) => prev.filter((l) => l.id !== id));
-    try {
-      await todoService.deleteTodoList(id);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to delete list");
-      throw err;
-    }
-  }, []);
+  const deleteList = useCallback(
+    async (id: number) => {
+      startAction();
+      const previousLists = [...lists];
+      setLists((prev) => prev.filter((l) => l.id !== id));
+      try {
+        await todoService.deleteTodoList(id);
+      } catch (err) {
+        setLists(previousLists);
+        setError(err instanceof Error ? err.message : "Failed to delete list");
+      }
+    },
+    [lists],
+  );
 
-  const updateList = useCallback(async (id: number, name: string) => {
-    setLists((prev) => prev.map((l) => (l.id === id ? { ...l, name } : l)));
-    try {
-      await todoService.updateTodoList(id, name);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to update list");
-      throw err;
-    }
-  }, []);
+  const updateList = useCallback(
+    async (id: number, name: string) => {
+      startAction();
+      const previousLists = [...lists];
+      setLists((prev) => prev.map((l) => (l.id === id ? { ...l, name } : l)));
+      try {
+        await todoService.updateTodoList(id, name);
+      } catch (err) {
+        setLists(previousLists);
+        setError(err instanceof Error ? err.message : "Failed to update list");
+        throw err;
+      }
+    },
+    [lists],
+  );
 
   const addItem = useCallback(
     async (
       listId: number,
       { name, description }: { name: string; description: string },
     ) => {
+      startAction();
+      const previousLists = [...lists];
       try {
         const newItem = await todoService.createTodoItem(listId, {
           name,
           description,
         });
+
         setLists((prev) =>
           prev.map((l) =>
             l.id === listId
@@ -86,15 +105,19 @@ export const useTodoLists = () => {
           ),
         );
       } catch (err) {
+        setLists(previousLists);
         setError(err instanceof Error ? err.message : "Failed to add item");
         throw err;
       }
     },
-    [],
+    [lists],
   );
 
   const updateItem = useCallback(
     async (listId: number, itemId: number, data: UpdateTodoItemDTO) => {
+      startAction();
+      const previousLists = [...lists];
+
       setLists((prev) =>
         prev.map((l) => {
           if (l.id !== listId) return l;
@@ -106,14 +129,15 @@ export const useTodoLists = () => {
           };
         }),
       );
+
       try {
         await todoService.updateTodoItem(listId, itemId, data);
       } catch (err) {
+        setLists(previousLists);
         setError(err instanceof Error ? err.message : "Failed to update item");
-        throw err;
       }
     },
-    [],
+    [lists],
   );
 
   const updateItemPositions = useCallback(
@@ -142,21 +166,27 @@ export const useTodoLists = () => {
     [],
   );
 
-  const deleteItem = useCallback(async (listId: number, itemId: number) => {
-    setLists((prev) =>
-      prev.map((l) =>
-        l.id === listId
-          ? { ...l, todoItems: l.todoItems.filter((i) => i.id !== itemId) }
-          : l,
-      ),
-    );
-    try {
-      await todoService.deleteTodoItem(listId, itemId);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to delete item");
-      throw err;
-    }
-  }, []);
+  const deleteItem = useCallback(
+    async (listId: number, itemId: number) => {
+      startAction();
+      const previousLists = [...lists];
+      setLists((prev) =>
+        prev.map((l) =>
+          l.id === listId
+            ? { ...l, todoItems: l.todoItems.filter((i) => i.id !== itemId) }
+            : l,
+        ),
+      );
+      try {
+        await todoService.deleteTodoItem(listId, itemId);
+      } catch (err) {
+        setLists(previousLists);
+        setError(err instanceof Error ? err.message : "Failed to delete item");
+        throw err;
+      }
+    },
+    [lists],
+  );
 
   const clearError = useCallback(() => setError(null), []);
 
