@@ -59,34 +59,38 @@ export const AddItemRow = ({ onSubmit, isLoading }: AddItemRowProps) => {
           onKeyDown={handleKeyDown}
           placeholder="Add your task..."
           disabled={loading || isLoading}
-          icon={<PlusIcon width={48} height={48} />}
+          icon={
+            <PlusIcon width={48} height={48} className="hover:cursor-default" />
+          }
           onIconClick={handleIconClick}
           iconTitle="Add task"
           inputClassName="py-2 text-sm"
         />
       </div>
-      <div
-        title={
-          !name.trim()
-            ? "To add a description first need to enter the task name"
-            : undefined
-        }
-      >
-        <Input
-          value={description}
-          onChange={setDescription}
-          onKeyDown={handleKeyDown}
-          placeholder="Description (optional)..."
-          disabled={loading || isLoading || !name.trim()}
-          inputClassName={cn(
-            "pr-11 border rounded-full py-1.5 text-sm focus:ring-2 focus:ring-blue-500 transition-colors",
-            {
-              "border-slate-300 bg-white": !darkMode,
-              "border-slate-600 bg-slate-800 text-slate-100": darkMode,
-            },
-          )}
-        />
-      </div>
+      {name.trim() && (
+        <div
+          title={
+            !name.trim()
+              ? "To add a description first need to enter the task name"
+              : undefined
+          }
+        >
+          <Input
+            value={description}
+            onChange={setDescription}
+            onKeyDown={handleKeyDown}
+            placeholder="Description (optional)..."
+            disabled={loading || isLoading || !name.trim()}
+            inputClassName={cn(
+              "pr-11 border rounded-full py-1.5 text-sm focus:ring-2 focus:ring-blue-500 transition-colors",
+              {
+                "border-slate-300 bg-white": !darkMode,
+                "border-slate-600 bg-slate-800 text-slate-100": darkMode,
+              },
+            )}
+          />
+        </div>
+      )}
     </form>
   );
 };

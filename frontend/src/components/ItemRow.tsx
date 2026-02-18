@@ -74,22 +74,15 @@ export const ItemRow = ({
           >
             {item.done ? (
               <CheckIcon
-                width={20}
-                height={20}
+                width={24}
+                height={24}
                 className={cn({
                   "text-slate-400": !darkMode,
                   "text-white": darkMode,
                 })}
               />
             ) : (
-              <CheckEmptyIcon
-                width={20}
-                height={20}
-                className={cn({
-                  "text-slate-400": !darkMode,
-                  "text-slate-500": darkMode,
-                })}
-              />
+              <CheckEmptyIcon width={24} height={24} />
             )}
           </button>
           <div className="flex-1">
@@ -151,13 +144,10 @@ export const ItemRow = ({
 
   return (
     <div
-      className={cn(
-        "flex items-start gap-3 p-3 border-b group cursor-pointer",
-        {
-          "border-gray-200 hover:bg-gray-50": !darkMode,
-          "border-slate-700 hover:bg-slate-700": darkMode,
-        },
-      )}
+      className={cn("flex items-start gap-3 p-3 border-b group cursor-grab", {
+        "border-gray-200 hover:bg-gray-50": !darkMode,
+        "border-slate-700 hover:bg-slate-700": darkMode,
+      })}
       title="Drag and drop to reorder"
     >
       {/* Drag Handle - visible on hover */}
@@ -180,22 +170,15 @@ export const ItemRow = ({
       >
         {item.done ? (
           <CheckIcon
-            width={20}
-            height={20}
+            width={24}
+            height={24}
             className={cn({
               "text-slate-400": !darkMode,
               "text-white": darkMode,
             })}
           />
         ) : (
-          <CheckEmptyIcon
-            width={20}
-            height={20}
-            className={cn({
-              "text-slate-400": !darkMode,
-              "text-slate-500": darkMode,
-            })}
-          />
+          <CheckEmptyIcon width={24} height={24} />
         )}
       </button>
       <div className="flex-1">
@@ -224,10 +207,7 @@ export const ItemRow = ({
         <button
           onClick={() => setIsEditing(true)}
           disabled={isLoading}
-          className={cn("disabled:text-gray-300 p-1", {
-            "text-blue-500 hover:text-blue-700": !darkMode,
-            "text-blue-400 hover:text-blue-300": darkMode,
-          })}
+          className={cn("disabled:text-gray-300 p-1")}
           title="Edit task"
         >
           <EditIcon className="w-5 h-5" />

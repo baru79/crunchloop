@@ -17,8 +17,8 @@ export const Card = ({ header, form, content, className = "" }: CardProps) => {
       className={cn(
         "flex flex-col h-full overflow-hidden rounded-lg border",
         {
-          "bg-white border-gray-200 text-slate-800": !darkMode,
-          "bg-slate-800 border-slate-700 text-slate-200": darkMode,
+          "bg-white border-slate-900  text-slate-800": !darkMode,
+          "bg-slate-800 border-gray-200  text-slate-200": darkMode,
         },
         className,
       )}
@@ -26,8 +26,8 @@ export const Card = ({ header, form, content, className = "" }: CardProps) => {
       {header && (
         <div
           className={cn("border-b", {
-            "border-slate-200": !darkMode,
-            "border-slate-700": darkMode,
+            " bg-slate-800 text-slate-200": !darkMode,
+            " bg-white text-slate-800": darkMode,
           })}
         >
           {header}

@@ -48,14 +48,7 @@ export const CreateListForm = ({
 
   const header = (
     <div className="p-4">
-      <h2
-        className={cn("text-xl font-bold", {
-          "text-slate-800": !darkMode,
-          "text-slate-100": darkMode,
-        })}
-      >
-        To-Do List
-      </h2>
+      <h2 className={cn("text-xl font-bold")}>To-Do List</h2>
     </div>
   );
 
@@ -66,7 +59,9 @@ export const CreateListForm = ({
         onChange={setName}
         placeholder="New list name..."
         disabled={loading || isLoading}
-        icon={<PlusIcon width={48} height={48} />}
+        icon={
+          <PlusIcon width={48} height={48} className="hover:cursor-default" />
+        }
         onIconClick={handleIconClick}
         iconTitle="Create list"
         className="flex-1"

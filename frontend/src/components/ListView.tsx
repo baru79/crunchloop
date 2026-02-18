@@ -122,12 +122,7 @@ export const ListView = ({
   };
 
   const header = (
-    <div
-      className={cn("flex items-center justify-between p-4 group", {
-        "text-slate-800": !darkMode,
-        "text-slate-100": darkMode,
-      })}
-    >
+    <div className={cn("flex items-center justify-between p-4 group")}>
       {isEditingName ? (
         <input
           type="text"
@@ -146,21 +141,20 @@ export const ListView = ({
           <h2
             onClick={() => setIsEditingName(true)}
             className={cn(
-              "text-lg font-bold flex-1 cursor-pointer transition-colors",
-              {
-                "hover:text-blue-600": !darkMode,
-                "hover:text-blue-300": darkMode,
-              },
+              "text-lg font-bold flex-1 cursor-text transition-colors",
             )}
           >
             {list.name}
           </h2>
           <div className="flex items-center gap-2">
             <span
-              className={cn("px-2 py-1 rounded-full text-sm font-medium", {
-                "bg-blue-100 text-blue-800": !darkMode,
-                "bg-blue-900/50 text-blue-300": darkMode,
-              })}
+              className={cn(
+                "px-2 py-1 rounded-full text-sm font-medium cursor-default",
+                {
+                  "bg-white border-gray-200 text-slate-800": !darkMode,
+                  "bg-slate-800 border-slate-700 text-slate-200": darkMode,
+                },
+              )}
             >
               {`Tasks: ${list.todoItems.length}`}
             </span>
@@ -168,17 +162,12 @@ export const ListView = ({
               <button
                 onClick={() => setShowFilter(!showFilter)}
                 className={cn("p-1 rounded transition-colors", {
-                  "hover:bg-slate-100": !darkMode,
-                  "hover:bg-slate-700": darkMode,
+                  "hover:bg-slate-100 hover:text-slate-800": !darkMode,
+                  "hover:bg-slate-800 hover:text-slate-200": darkMode,
                 })}
                 title="Filter tasks"
               >
-                <FilterIcon
-                  className={cn("w-5 h-5", {
-                    "text-slate-500": !darkMode,
-                    "text-slate-300": darkMode,
-                  })}
-                />
+                <FilterIcon className={cn("w-5 h-5")} />
               </button>
               {showFilter && (
                 <div

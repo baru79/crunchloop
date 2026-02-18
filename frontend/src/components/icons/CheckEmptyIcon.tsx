@@ -1,3 +1,4 @@
+import { useTheme } from "../../hooks/useTheme";
 import { cn } from "../../utils";
 
 export const CheckEmptyIcon = ({
@@ -8,18 +9,23 @@ export const CheckEmptyIcon = ({
   className?: string;
   width?: number;
   height?: number;
-}) => (
-  <svg
-    className={cn(
-      "text-gray-300 dark:text-slate-600 hover:text-blue-500 dark:hover:text-blue-400 transition-colors",
-      className,
-    )}
-    width={width}
-    height={height}
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-  </svg>
-);
+}) => {
+  const { theme } = useTheme();
+  const darkMode = theme === "dark";
+  return (
+    <svg
+      className={cn(
+        "transition-colors",
+        { "text-slate-600": !darkMode, "text-slate-300": darkMode },
+        className,
+      )}
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
+};
