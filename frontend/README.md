@@ -2,6 +2,21 @@
 
 Este proyecto es el frontend para la aplicación de gestión de listas de tareas (Todo Lists). Está construido con React, TypeScript y Vite.
 
+## Funcionalidades
+
+- Creacion de listas
+- Creacion de items dentro de una lista
+- Edicion de listas
+- Edicion de items dentro de una lista
+- Eliminacion de listas
+- Eliminacion de items dentro de una lista
+- Reordenamiento de tareas mediante arrastrar y soltar (drag and drop)
+- Cambio de tema oscuro/claro
+- Filtros de items
+- Diseño responsivo
+- Persistencia del estado de la app atraves de localStorage
+- Manejo de errores y notificaciones emergentes
+
 ## Instrucciones de Ejecución
 
 ### Ejecución Local

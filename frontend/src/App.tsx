@@ -3,7 +3,7 @@ import { ListView } from "./components/ListView";
 import { SpinnerIcon } from "./components/icons/SpinnerIcon";
 import { LightIcon } from "./components/icons/LightIcon";
 import { DarkIcon } from "./components/icons/DarkIcon";
-import { useTodoManager } from "./hooks/useTodoManager";
+import { useTodoLists } from "./hooks/useTodoLists";
 import { cn } from "./utils";
 import { useTheme } from "./hooks/useTheme";
 
@@ -22,7 +22,7 @@ function App() {
     updateItemPositions,
     deleteItem,
     clearError,
-  } = useTodoManager();
+  } = useTodoLists();
 
   const darkMode = theme === "dark";
 

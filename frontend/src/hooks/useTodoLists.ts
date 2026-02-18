@@ -3,7 +3,7 @@ import type { TodoList, TodoItem, UpdateTodoItemDTO } from "../types";
 import { todoService } from "../services/todoService";
 import { getLocalStorageLists, setLocalStorageLists } from "../utils";
 
-export const useTodoManager = () => {
+export const useTodoLists = () => {
   const [lists, setLists] = useState<TodoList[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
