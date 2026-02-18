@@ -6,6 +6,7 @@ import { DarkIcon } from "./components/icons/DarkIcon";
 import { useTodoLists } from "./hooks/useTodoLists";
 import { cn } from "./utils";
 import { useTheme } from "./hooks/useTheme";
+import { CloseIcon } from "./components/icons/CloseIcon";
 
 function App() {
   const { theme, toggleTheme } = useTheme();
@@ -33,27 +34,37 @@ function App() {
         "bg-gray-100": !darkMode,
       })}
     >
-      <div className="absolute top-4 right-4 z-10">
-        <button
-          onClick={toggleTheme}
+      <div className="max-w-6xl mx-auto relative">
+        <header
           className={cn(
-            "p-2 rounded-full transition-colors border hover:cursor-pointer",
+            "flex items-center justify-between p-4 mb-6 rounded-lg border",
             {
-              "bg-gray-800 border-gray-700 text-white hover:bg-gray-700":
-                darkMode,
-              "border-gray-200 text-gray-600 hover:bg-gray-100": !darkMode,
+              "bg-slate-800 text-slate-200 border-slate-900": !darkMode,
+              "bg-white text-slate-800 border-gray-200": darkMode,
             },
           )}
-          title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
         >
-          {darkMode ? (
-            <LightIcon className="w-6 h-6" />
-          ) : (
-            <DarkIcon className="w-6 h-6" />
-          )}
-        </button>
-      </div>
-      <div className="max-w-6xl mx-auto relative">
+          <h1 className="text-xl font-bold">To-Do List</h1>
+          <button
+            onClick={toggleTheme}
+            className={cn(
+              "p-2 rounded-full transition-colors border hover:cursor-pointer",
+              {
+                "bg-gray-500 border-gray-700 text-white hover:bg-gray-400":
+                  !darkMode,
+                "border-gray-300 text-gray-800 hover:bg-gray-200": darkMode,
+              },
+            )}
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {darkMode ? (
+              <LightIcon className="w-6 h-6" />
+            ) : (
+              <DarkIcon className="w-6 h-6 text-white" />
+            )}
+          </button>
+        </header>
+
         {/* Error Message */}
         {error && (
           <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg flex justify-between items-center">
@@ -62,23 +73,47 @@ function App() {
               onClick={clearError}
               className="text-red-700 hover:text-red-800"
             >
-              ×
+              <CloseIcon className="w-6 h-6" />
             </button>
           </div>
         )}
 
         {/* Create List Form */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:mb-6">
-          <div></div>
-          <div>
+        <div
+          className={cn("w-full border-b mb-6", {
+            "border-gray-200": darkMode,
+            "border-slate-700": !darkMode,
+          })}
+        >
+          <div className="grid grid-cols-1 max-w-90 m-auto">
             <CreateListForm
-              lists={lists}
               onSubmit={(name) => createList({ name })}
               isLoading={loading}
             />
           </div>
-          <div></div>
         </div>
+
+        {/* Empty state */}
+        {!loading && lists.length === 0 && (
+          <div className="p-12 text-center">
+            <p
+              className={cn({
+                "text-slate-500": !darkMode,
+                "text-slate-400": darkMode,
+              })}
+            >
+              No lists have been entered yet.
+            </p>
+            <p
+              className={cn("text-sm p-4", {
+                "text-slate-400": !darkMode,
+                "text-slate-500": darkMode,
+              })}
+            >
+              Create your first list to get started.
+            </p>
+          </div>
+        )}
 
         {/* Loading State */}
         {loading && lists.length === 0 && (
